@@ -1,14 +1,14 @@
-import { Button, StyleSheet, TextInput, View } from "react-native"
+import {  Button, StyleSheet, TextInput, View } from "react-native"
 import { useDispatch } from "react-redux";
 import { Controller, useForm } from 'react-hook-form'
 import { authenticate } from "../store/redux/authSlice";
-import { Text, InputField } from "@gluestack-ui/themed"
-import { Input } from '@gluestack-ui/themed';
+import { Text, InputField, GluestackUIStyledProvider, ButtonText, GluestackUIProvider } from "@gluestack-ui/themed"
+import { Input, FlatList } from '@gluestack-ui/themed';
 
 function LoginScreen() {
 
     const predefinedUsername = 'admin';
-    const predefinedPasswoar = 'pass';  
+    const predefinedPasswoar = 'pass';
 
 
 
@@ -16,13 +16,18 @@ function LoginScreen() {
     const { control, handleSubmit } = useForm();
 
     const onSubmit = () => {
-        
+
         dispatch(authenticate());
     }
 
 
     return (
         <View>
+            {/* <GluestackUIProvider >
+                <Button>
+                    <ButtonText>Hello World</ButtonText>
+                </Button>
+            </GluestackUIProvider> */}
             <Text>login</Text>
             <Input
                 variant="outline"
@@ -33,7 +38,7 @@ function LoginScreen() {
             >
                 <InputField placeholder="Enter Text here" />
             </Input>
-            
+
             <Controller
                 name="username"
                 defaultValue=""

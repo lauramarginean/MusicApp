@@ -6,6 +6,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { store } from './src/store/redux/store';
 import { selectIsAuthenticated } from "./src/store/redux/authSlice";
 import { GluestackUIProvider } from "@gluestack-ui/themed";
+import { ApiProvider } from "@reduxjs/toolkit/query/react";
+import { movieApi } from "./src/store/redux/api";
+import MovieList from "./src/screens/MoviesOverview";
 
 
 const Stack = createNativeStackNavigator();
@@ -19,7 +22,7 @@ function App() {
         <Stack.Navigator>
           {
             isAuthenticated ? (
-              <Stack.Screen name="Profile" component={ProfileScreen} />
+              <Stack.Screen name="Profile" component={MovieList} />
             ) : (
               <Stack.Screen name="Login" component={LoginScreen} />
             )
@@ -35,8 +38,10 @@ function App() {
 export default function AppWrapper() {
 
   return (
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ApiProvider api={movieApi}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ApiProvider>
   );
 }
