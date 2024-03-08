@@ -44,12 +44,18 @@ function LoginScreen() {
                 defaultValue=""
                 control={control}
                 render={({ field: { onBlur, onChange, value } }) => (
-                    <TextInput
+                <Input
+                    variant="outline"
+                    size="md"
+                    isDisabled={false}
+                    isInvalid={false}
+                    isReadOnly={false}>
+                    <InputField
                         placeholder="Username"
                         onBlur={onBlur}
                         onChangeText={onChange}
-                        value={value}
-                    />
+                        value={value} />
+                </Input>
                 )}
             />
             <Controller
@@ -57,12 +63,18 @@ function LoginScreen() {
                 defaultValue=""
                 control={control}
                 render={({ field: { onBlur, onChange, value } }) => (
-                    <TextInput
+                    <Input
+                    variant="outline"
+                    size="md"
+                    isDisabled={false}
+                    isInvalid={false}
+                    isReadOnly={false}>
+                    <InputField
                         placeholder="Password"
                         onBlur={onBlur}
                         onChangeText={onChange}
-                        value={value}
-                    />
+                        value={value} />
+                    </Input>
                 )}
             />
 
