@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { store } from './src/store/redux/store';
 import { selectIsAuthenticated } from "./src/store/redux/authSlice";
+import { config } from "@gluestack-ui/config";
 import { GluestackUIProvider } from "@gluestack-ui/themed";
 import { ApiProvider } from "@reduxjs/toolkit/query/react";
 import { movieApi } from "./src/store/redux/api";
@@ -17,7 +18,7 @@ function App() {
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
   return (
-    < GluestackUIProvider>
+    < GluestackUIProvider config={config}>
       < NavigationContainer >
         <Stack.Navigator>
           {
