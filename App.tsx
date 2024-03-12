@@ -9,6 +9,8 @@ import { GluestackUIProvider } from "@gluestack-ui/themed";
 import { ApiProvider } from "@reduxjs/toolkit/query/react";
 import { movieApi } from "./src/store/redux/api";
 import MovieList from "./src/screens/MoviesOverview";
+import { config } from "@gluestack-ui/config"
+import MovieDetails from "./src/screens/MovieDetails";
 
 
 const Stack = createNativeStackNavigator();
@@ -17,12 +19,12 @@ function App() {
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
   return (
-    < GluestackUIProvider>
+    < GluestackUIProvider config={config}>
       < NavigationContainer >
         <Stack.Navigator>
           {
             isAuthenticated ? (
-              <Stack.Screen name="Profile" component={MovieList} />
+              <Stack.Screen name="Profile" component={MovieDetails} />
             ) : (
               <Stack.Screen name="Login" component={LoginScreen} />
             )

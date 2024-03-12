@@ -1,20 +1,21 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { useGetMoviesQuery } from "../store/redux/api";
+import { useGetMovieByIdQuery } from "../store/redux/api";
 
-export default function MovieList() {
-    const {data} = useGetMoviesQuery();
+export default function MovieDetails() {
+    const { data } = useGetMovieByIdQuery();
 
     console.log(data)
 
 
     return (
         <View>
+
             <FlatList
                 data={data}
-                keyExtractor={(item) => item.results.id}
+                keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                     <View>
-                        <Text style={styles.container}>{item.results.title}</Text>
+                        <Text style={styles.container}>{item.title}</Text>
                     </View>
                 )}
             />

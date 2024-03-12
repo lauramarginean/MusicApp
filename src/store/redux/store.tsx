@@ -8,6 +8,7 @@ export const store = configureStore({
         [movieApi.reducerPath]: movieApi.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(movieApi.middleware),
+    
 });
 
 export type RootState = ReturnType<typeof store.getState>

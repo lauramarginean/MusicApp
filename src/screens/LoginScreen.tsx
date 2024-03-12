@@ -1,4 +1,4 @@
-import {  Button, StyleSheet, TextInput, View } from "react-native"
+import { Alert, Button, StyleSheet, TextInput, View } from "react-native"
 import { useDispatch } from "react-redux";
 import { Controller, useForm } from 'react-hook-form'
 import { authenticate } from "../store/redux/authSlice";
@@ -7,49 +7,46 @@ import { Input, FlatList } from '@gluestack-ui/themed';
 
 function LoginScreen() {
 
-    const predefinedUsername = 'admin';
-    const predefinedPasswoar = 'pass';
+    const predefinedUsername = 'Admin';
+    const predefinedPasswoar = 'Pass';
 
 
 
     const dispatch = useDispatch();
     const { control, handleSubmit } = useForm();
 
-    const onSubmit = () => {
+    const onSubmit = (data: { username: string; password: string }) => {
+        if (data.username === predefinedUsername && data.password === predefinedPasswoar) {
+            dispatch(authenticate());
+        } else {
+            Alert.alert('Error', 'Incorrect user or password')
+        }
 
-        dispatch(authenticate());
     }
 
 
     return (
         <View>
-            {/* <GluestackUIProvider >
-                <Button>
-                    <ButtonText>Hello World</ButtonText>
-                </Button>
-            </GluestackUIProvider> */}
-            <Text>login</Text>
-            <Input
-                variant="outline"
-                size="md"
-                isDisabled={false}
-                isInvalid={false}
-                isReadOnly={false}
-            >
-                <InputField placeholder="Enter Text here" />
-            </Input>
+            <Text>login</Text>            
 
             <Controller
                 name="username"
                 defaultValue=""
                 control={control}
                 render={({ field: { onBlur, onChange, value } }) => (
-                    <TextInput
-                        placeholder="Username"
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
-                    />
+                    <Input
+                        variant="outline"
+                        size="md"
+                        isDisabled={false}
+                        isInvalid={false}
+                        isReadOnly={false}
+                    >
+                        <InputField placeholder="Username"
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            value={value} />
+                    </Input>
+
                 )}
             />
             <Controller
@@ -57,15 +54,21 @@ function LoginScreen() {
                 defaultValue=""
                 control={control}
                 render={({ field: { onBlur, onChange, value } }) => (
-                    <TextInput
-                        placeholder="Password"
+                    <Input
+                        variant="outline"
+                        size="md"
+                        isDisabled={false}
+                        isInvalid={false}
+                        isReadOnly={false}
+                    >
+                        <InputField placeholder="Password"
                         onBlur={onBlur}
                         onChangeText={onChange}
-                        value={value}
-                    />
+                        value={value}/>
+                    </Input>
+                  
                 )}
             />
-
             <Button title="Login"
                 onPress={handleSubmit(onSubmit)}
             />
