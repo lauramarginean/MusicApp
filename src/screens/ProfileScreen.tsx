@@ -1,7 +1,7 @@
-import { Button, StyleSheet, Text, View } from "react-native"
+
 import { useDispatch } from "react-redux";
 import { logout } from "../store/redux/authSlice";
-import { store } from "../store/redux/store";
+import { Box, Button, ButtonText, Text } from "@gluestack-ui/themed";
 
 function ProfileScreen() {
 
@@ -12,20 +12,25 @@ function ProfileScreen() {
     }
 
     return (
-        <View>
-            <Text>Profile Screen</Text>
-            <Button title="Logout" onPress={handleLogout}/>
-    
-        </View>
-        
+        <Box alignItems="center">
+            <Text
+                size={'lg'}
+                bold={true}>
+                Profile Screen
+            </Text>
+            <Button
+                m='$2'
+                size="md"
+                variant="solid"
+                action="primary"
+                isDisabled={false}
+                isFocusVisible={false}
+                onPress={handleLogout}>
+                <ButtonText>Logout </ButtonText>
+            </Button>
+        </Box>
+
     )
 }
 
 export default ProfileScreen
-
-const styles = StyleSheet.create({
-    container: {
-        margin: 50,
-        padding: 50
-    }
-});

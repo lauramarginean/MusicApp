@@ -18,11 +18,11 @@ export const movieApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getMovies: builder.query({
+    getMovies: builder.query<MovieList,void>({
       query: () => `discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc`
     }),
-    getMovieById: builder.query({
-      query: () => 'movie/157336?api_key=0effc0a7bcabe4e8b16fbf28be5e9135'
+    getMovieById: builder.query<Movie,number>({
+      query: postId => `movie/${postId}?api_key=0effc0a7bcabe4e8b16fbf28be5e9135`
     })
   }),
 
@@ -32,7 +32,17 @@ export const movieApi = createApi({
 export const { useGetMoviesQuery } = movieApi
 export const { useGetMovieByIdQuery } = movieApi
 
-type Movie = {
+export type Movie = {
   id: number,
-  title: string
+  original_title: string,
+  release_date: string,
+  tagline: string,
+  budget: number,
+  overview: string,
+  popularity: number,
+  backdrop_path: string
+}
+
+type MovieList ={
+  results: Movie[]
 }
